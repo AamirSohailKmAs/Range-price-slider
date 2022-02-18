@@ -1,0 +1,296 @@
+<html lang="en" class="-webkit- js">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>CodePen Demo</title>
+
+  <meta name="robots" content="noindex">
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <style media="" data-href="https://fonts.googleapis.com/css2?family=Ubuntu&amp;display=swap">
+    /* cyrillic-ext */
+    @font-face {
+      font-family: 'Ubuntu';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/ubuntu/v19/4iCs6KVjbNBYlgoKcg72j00.woff2) format('woff2');
+      unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+    }
+
+    /* cyrillic */
+    @font-face {
+      font-family: 'Ubuntu';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/ubuntu/v19/4iCs6KVjbNBYlgoKew72j00.woff2) format('woff2');
+      unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+    }
+
+    /* greek-ext */
+    @font-face {
+      font-family: 'Ubuntu';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/ubuntu/v19/4iCs6KVjbNBYlgoKcw72j00.woff2) format('woff2');
+      unicode-range: U+1F00-1FFF;
+    }
+
+    /* greek */
+    @font-face {
+      font-family: 'Ubuntu';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/ubuntu/v19/4iCs6KVjbNBYlgoKfA72j00.woff2) format('woff2');
+      unicode-range: U+0370-03FF;
+    }
+
+    /* latin-ext */
+    @font-face {
+      font-family: 'Ubuntu';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/ubuntu/v19/4iCs6KVjbNBYlgoKcQ72j00.woff2) format('woff2');
+      unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+    }
+
+    /* latin */
+    @font-face {
+      font-family: 'Ubuntu';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/ubuntu/v19/4iCs6KVjbNBYlgoKfw72.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+  </style>
+
+
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+  <style type="text/css" class="INLINE_PEN_STYLESHEET_ID">
+    /* ==================== ↓↓↓ NOT RELATED TO DEMO ↓↓↓ ==================== */
+    #wwrap {
+      pointer-events: none;
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    html.up #wwrap {
+      flex-direction: column;
+    }
+
+    #wwrap [class*=warn--] {
+      box-sizing: border-box;
+      position: relative;
+      margin: 0.5em 0;
+      padding: 1em 0.5em 0.5em;
+      width: calc(100% - 2em);
+      border-radius: 5px;
+      box-shadow: 0 0 5px dimgrey;
+      background: orangered;
+      color: #fff;
+      font: 1.25rem arial, sans-serif;
+      transition: transform 0.3s cubic-bezier(0.65, -0.29, 0.73, 0.05);
+      pointer-events: auto;
+    }
+
+    #wwrap [class*=warn--].hidden {
+      transform: scale(0);
+    }
+
+    #wwrap .warn__close {
+      position: absolute;
+      border: none;
+      background: none;
+      top: 0.25em;
+      right: 0.25em;
+      transition: 0.3s;
+      font-size: 0.75em;
+      cursor: pointer;
+    }
+
+    #wwrap .warn__close:focus {
+      outline: none;
+    }
+
+    #wwrap .warn__close:focus,
+    #wwrap .warn__close:hover {
+      color: #fff;
+    }
+
+    #wwrap .warn__close:active {
+      transform: translatey(2px) scale(0.9);
+      color: crimson;
+    }
+
+    /* ==================== ↑↑↑ NOT RELATED TO DEMO ↑↑↑ ==================== */
+    * {
+      margin: 0;
+      padding: 0;
+      font: inherit;
+    }
+
+    body,
+    form,
+    datalist {
+      display: grid;
+    }
+
+    body {
+      overflow-x: hidden;
+      min-height: 100vh;
+      background: linear-gradient(#f8f8f8, #d9d9d9);
+      font: 1em/1.25 ubuntu, trebuchet ms, verdana;
+    }
+
+    @media (max-width: 240px) {
+      body {
+        font-size: 0.75em;
+      }
+    }
+
+    form {
+      --k: calc((var(--val) - var(--min))/ (var(--max) - var(--min)));
+      --pos: calc(1.125em + var(--k)*(100% - 2.25em));
+      grid-gap: 0.25em;
+      place-self: center;
+      min-width: 8em;
+      width: calc(100% - 1.5em);
+      max-width: 19.5em;
+      filter: Saturate(var(--hl, 0));
+      transition: filter 0.3s ease-out;
+    }
+
+    form:focus-within,
+    form:hover {
+      --hl: 1;
+    }
+
+    input[type=range] {
+      height: 2.25em;
+      border-radius: 2.25em;
+      box-shadow: 0 -1px #eaeaea, 0 1px #fff;
+      background: linear-gradient(#c3c3c3, #f1f1f1);
+      cursor: pointer;
+    }
+
+    input[type=range],
+    input[type=range]::-webkit-slider-runnable-track,
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+    }
+
+    input[type=range][list]::-webkit-slider-container {
+      min-height: 1.5em;
+    }
+
+    input[type=range]::-webkit-slider-container {
+      -webkit-user-modify: read-write !important;
+      margin: 0.375em;
+      height: 1.5em;
+      border-radius: 0.75em;
+      box-shadow: inset 0 1px 4px #8c8c8c;
+      background: linear-gradient(#f8dd36, #d68706) 0/var(--pos) no-repeat, linear-gradient(#efefef, #c9c9c9);
+    }
+
+    input[type=range]::-webkit-slider-runnable-track {
+      margin: -0.375em;
+    }
+
+    input[type=range]::-moz-range-track {
+      margin: 0.375em;
+      height: 1.5em;
+      border-radius: 0.75em;
+      box-shadow: inset 0 1px 4px #8c8c8c;
+      background: linear-gradient(#f8dd36, #d68706) 0/var(--pos) no-repeat, linear-gradient(#efefef, #c9c9c9);
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      box-sizing: border-box;
+      border: solid 0.375em transparent;
+      width: 2.25em;
+      height: 2.25em;
+      border-radius: 50%;
+      box-shadow: 0 2px 5px #7d7d7d;
+      background: linear-gradient(#c5c5c5, whitesmoke) padding-box, linear-gradient(#fbfbfb, #c2c2c2) border-box;
+      cursor: ew-resize;
+    }
+
+    input[type=range]::-moz-range-thumb {
+      box-sizing: border-box;
+      border: solid 0.375em transparent;
+      width: 2.25em;
+      height: 2.25em;
+      border-radius: 50%;
+      box-shadow: 0 2px 5px #7d7d7d;
+      background: linear-gradient(#c5c5c5, whitesmoke) padding-box, linear-gradient(#fbfbfb, #c2c2c2) border-box;
+      cursor: ew-resize;
+    }
+
+    input[type=range]:focus {
+      outline: none;
+    }
+
+    datalist {
+      grid-row: 1;
+      grid-template-columns: 3em 1fr 3em;
+      place-content: end center;
+      margin: 0 -0.375em;
+      color: #bababa;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    datalist::after {
+      place-self: end center;
+      margin-bottom: 3px;
+      width: min(12em, 100%);
+      min-height: 0.5em;
+      grid-area: 1/2;
+      background: linear-gradient(90deg, transparent 2px, #f0ba22 0) -1px/1em round;
+      clip-path: polygon(0 calc(100% - 1px), 0 100%, 100% 100%, 100% 0);
+      content: "";
+    }
+  </style>
+</head>
+
+<body>
+
+  <form style="--min: 0; --max: 100; --val:97;">
+    <input type="range" min="0" max="100" value="25" list="l">
+    <datalist id="l">
+      <option label="min" value="0"></option>
+      <option label="max" value="100"></option>
+    </datalist>
+  </form>
+  <script>
+    /* external resources *only* for displaying the info boxes */
+
+    /* this below is all the JS needed for the demo itself to work */
+    document.documentElement.classList.add('js');
+
+    addEventListener('input', e => {
+      let _t = e.target;
+
+      _t.parentNode.style.setProperty('--val', +_t.value)
+    }, false);
+  </script>
+
+</body>
+
+</html>
